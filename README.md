@@ -1,5 +1,5 @@
 # Hardcaml-Cryptography-Library
-HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys boards using Hardcaml
+HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys boards for Hardcaml
 
 # Architecture
 
@@ -23,11 +23,9 @@ HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys
 # MVP Deliverables
 
 -  Core cryptographic circuits in Hardcaml
--  Type-safe OCaml bindings matching Tink's API style
 -  Simulation test suite with known test vectors
 -  Basic FPGA deployment examples (Xilinx/Intel)
 -  Performance benchmarks vs. software implementations
-
 
 # MVP Crypto Suite 
 1. Block Ciphers

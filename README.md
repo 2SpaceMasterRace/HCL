@@ -52,3 +52,11 @@ HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys
 -  Homomorphic encryption primitives
 -  Multi-party computation support
 -  Cloud FPGA deployment (AWS F1, Azure NP)
+
+# References 
+
+- [CryptoHack – Courses](https://cryptohack.org/courses/)
+- [MIT 6.875 - Foundations of Cryptography](http://mit6875.org/)
+- [Understanding Cryptography by Christof Paar - Book](https://www.cryptography-textbook.com/book/#toc)
+- [Introduction to Cryptography by Christof Paar – YouTube](https://www.youtube.com/@introductiontocryptography4223/videos)
+

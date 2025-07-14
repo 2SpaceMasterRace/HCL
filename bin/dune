@@ -1,0 +1,4 @@
+(executable
+ (public_name HCL)
+ (name main)
+ (libraries HCL))

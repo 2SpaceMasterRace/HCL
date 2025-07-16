@@ -1,7 +1,7 @@
 open Hardcaml
 open Hardcaml.Signal
 open! Hardcaml.Always
-module Helpers = Aes_helpers
+module Helpers = test_helpers
 
 module I = struct
   type 'a t = {
@@ -19,7 +19,7 @@ module O = struct
   type 'a t = {
     data_out : 'a [@bits 128]
     ;done_ : 'a
-    ;ready : 'a                   
+    ;ready : 'a
   } [@@deriving sexp_of, hardcaml]
 end
 
@@ -52,11 +52,11 @@ let create (i : _ I.t) : _ O.t =
   let key_expansion_counter = Always.Variable.reg spec ~width:4 in
   
   let get_byte data idx = 
-    (* if idx = 0, end bit would be 7, 1 - 8, 2 - 5*)
+    (*selects induvidual data : [7:0];[15:8]; etc*)
     select data ((idx + 1) * 8 - 1) (idx * 8) 
   in
   
-  (* Create 128-bit value from bytes *)
+  (* Create 128-bit value from bytes setting b15 as msb and b0 as lsb *)
   let from_bytes b15 b14 b13 b12 b11 b10 b9 b8 b7 b6 b5 b4 b3 b2 b1 b0 =
     concat_msb [b15; b14; b13; b12; b11; b10; b9; b8; b7; b6; b5; b4; b3; b2; b1; b0]
   in
@@ -77,12 +77,10 @@ let create (i : _ I.t) : _ O.t =
         ];
       ];
       
-      (* Key expansion state *)
       KeyExpansion, [
         let idx = key_exp_counter.value in
         let prev_key = round_keys.(to_int idx).value in
         
-        (* Perform one step of key expansion *)
         let next_key = Helpers.key_expansion_step prev_key idx in
         when_ (idx <:. 10) [
           key_exp_counter <-- idx +:. 1;
@@ -94,20 +92,17 @@ let create (i : _ I.t) : _ O.t =
         ];
       ];
       
-      (* Initial round - just AddRoundKey *)
       InitialRound, [
         state_reg <-- (state_reg.value ^: round_keys.(0).value);
         round_counter <--. 1;
         sm.set_next MainRounds;
       ];
       
-      (* Main rounds (1-9 for AES-128) *)
       MainRounds, [
         let round = round_counter.value in
         let current_state = state_reg.value in
         let round_key = mux round (Array.to_list (Array.map (fun k -> k.value) round_keys)) in
         
-        (* Transform pipeline for encryption or decryption *)
         let transformed = 
           if_then_else i.mode
             (* Decryption *)
@@ -116,6 +111,7 @@ let create (i : _ I.t) : _ O.t =
              let add_key = inv_sub ^: round_key in
              let inv_mix = Helpers.inv_mix_columns add_key in
              inv_mix)
+
             (* Encryption *)
             (let sub = Helpers.sub_bytes current_state in
              let shift = Helpers.shift_rows sub in
@@ -132,7 +128,6 @@ let create (i : _ I.t) : _ O.t =
         ];
       ];
       
-      (* Final round - no MixColumns *)
       FinalRound, [
         let current_state = state_reg.value in
         let final_key = round_keys.(10).value in
@@ -143,6 +138,7 @@ let create (i : _ I.t) : _ O.t =
             (let inv_shift = Helpers.inv_shift_rows current_state in
              let inv_sub = Helpers.inv_sub_bytes inv_shift in
              inv_sub ^: final_key)
+
             (* Encryption final round *)
             (let sub = Helpers.sub_bytes current_state in
              let shift = Helpers.shift_rows sub in
@@ -154,7 +150,6 @@ let create (i : _ I.t) : _ O.t =
         sm.set_next Done;
       ];
       
-      (* Done state - hold output *)
       Done, [
         done_flag <--. 1;
         when_ (~: i.start) [
@@ -164,14 +159,12 @@ let create (i : _ I.t) : _ O.t =
     ];
   ]);
   
-  (* Create output *)
   { O.
     data_out = output_reg.value;
     done_ = done_flag.value;
     ready = ready_flag.value;
   }
 
-(* Create the circuit *)
 let circuit =
   let module C = Circuit.With_interface(I)(O) in
   C.create_exn ~name:"aes_128" create

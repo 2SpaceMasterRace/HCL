@@ -1,0 +1,8 @@
+(include_subdirs no)
+
+(library
+ (public_name HCL.utils)
+ (name utils)
+ (libraries core hardcaml)
+ (modules test_helpers)
+ (preprocess (pps ppx_jane)))

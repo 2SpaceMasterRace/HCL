@@ -191,7 +191,7 @@ let test_performance () =
   
   Printf.printf "Processed %d blocks in %.3f seconds\n" num_blocks elapsed;
   Printf.printf "Throughput: %.0f blocks/second\n" blocks_per_sec;
-  Printf.printf "Assuming 100MHz clock: %.2f Gbps\n" 
+  Printf.printf "100MHz clock: %.2f Gbps\n" 
     (blocks_per_sec *. 128.0 /. 1e9 *. 100e6 /. blocks_per_sec)
 
 let () =

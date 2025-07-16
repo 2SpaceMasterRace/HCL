@@ -1,6 +1,0 @@
-# dune init proj HCL
-# OCAMLPARAM: unset
-# Shared cache: enabled-except-user-rules
-# Shared cache location: /home/nanodijkstra/.cache/dune/db
-# Workspace root: /home/nanodijkstra/Work/iitm-experiments/HCL
-# Auto-detected concurrency: 8

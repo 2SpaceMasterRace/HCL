@@ -1,0 +1,9 @@
+(include_subdirs no) 
+
+(library
+ (public_name HCL.primitives)
+ (name primitives)
+ (libraries core hardcaml HCL.utils)
+ (preprocess (pps ppx_jane)))
+
+

@@ -1,2 +1,8 @@
 (library
- (name HCL))
+ (public_name HCL)
+ (name hcl)
+ (libraries core hardcaml)
+ (modules hcl)
+ (preprocess (pps ppx_jane)))
+
+(include_subdirs unqualified)

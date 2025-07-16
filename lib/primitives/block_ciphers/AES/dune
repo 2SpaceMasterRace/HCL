@@ -1,0 +1,5 @@
+(library
+ (public_name HCL.aes)
+ (name aes)
+ (libraries core hardcaml HCL.utils)
+ (preprocess (pps ppx_jane ppx_hardcaml)))

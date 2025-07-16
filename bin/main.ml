@@ -1,36 +1,42 @@
+(* bin/main.ml *)
 open Core
 open Hardcaml
-open Hardcaml_example
+open Aes
 
-let generate rtl =
+let generate language =
+  let module C = Circuit.With_interface (Aes.I) (Aes.O) in
+  let circuit = C.create_exn ~name:"aes_128" Aes.create in
+  Rtl.print language circuit
+
+let simulate () =
+  let _exit_status =
+    Core_unix.system
+      "dune exec test/test_primitives/test_block_ciphers/test_aes/test_aes.exe"
+  in
+  ()
+
+let cmd_generate rtl =
   Command.basic
     ~summary:
-      ("Generate "
-       ^
+      ("Generate " ^
        match rtl with
        | Rtl.Language.Verilog -> "Verilog"
        | Vhdl -> "VHDL")
     [%map_open.Command
       let () = return () in
-      fun () ->
-        let module Circuit = Circuit.With_interface (Counter.I) (Counter.O) in
-        let circuit = Circuit.create_exn ~name:"counter" Counter.create in
-        Rtl.print rtl circuit]
-;;
+      fun () -> generate rtl]
 
-let simulate =
+let cmd_simulate =
   Command.basic
-    ~summary:"Run simulation"
+    ~summary:"Run AES-128 encryption/decryption tests"
     [%map_open.Command
       let () = return () in
-      fun () ->
-        Hardcaml_waveterm_interactive.run
-          (Hardcaml_example_test.Test_counter.test_counter ())]
-;;
+      fun () -> simulate ()]
 
 let () =
   Command_unix.run
     (Command.group
-       ~summary:"simulate or generate rtl for counter design."
-       [ "simulate", simulate; "verilog", generate Verilog; "vhdl", generate Vhdl ])
-;;
+       ~summary:"AES-128 Hardcaml demo: generate RTL or simulate"
+       [ "simulate", cmd_simulate
+       ; "verilog",  cmd_generate Verilog
+       ; "vhdl",     cmd_generate Vhdl ])

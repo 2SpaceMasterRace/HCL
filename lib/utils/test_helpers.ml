@@ -1,4 +1,3 @@
-open Hardcaml
 open Hardcaml.Signal
 
 let sbox = [|
@@ -79,12 +78,12 @@ let shift_rows state =
 
 let inv_shift_rows state =
   let b = Array.init 16 (fun i -> get_byte state i) in
-  
   from_bytes [
-    b.(15); b.(2);  b.(5);  b.(8);
-    b.(3);  b.(6);  b.(9);  b.(12)
-    b.(7);  b.(10); b.(13); b.(0);
-    b.(11); b.(14); b.(1);  b.(4);
+    b.(3);  b.(0);  b.(1);  b.(2);
+    b.(7);  b.(4);  b.(5);  b.(6);
+    b.(11); b.(8);  b.(9);  b.(10);
+    b.(15); b.(12); b.(13); b.(14)
+  ]
 
 (* Galois field multiplication by 2 (xtime) *)
 let xtime byte =

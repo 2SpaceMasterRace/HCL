@@ -19,19 +19,12 @@ let sbox = [|
   0x8c; 0xa1; 0x89; 0x0d; 0xbf; 0xe6; 0x42; 0x68; 0x41; 0x99; 0x2d; 0x0f; 0xb0; 0x54; 0xbb; 0x16
 |]
 
-
-(* ------------------------------------------------------------------ *)
-(* Byte helpers with big-endian mapping                              *)
-(* ------------------------------------------------------------------ *)
 let from_bytes bytes = concat_msb bytes
 
 let get_byte data idx =
   let hi = 127 - idx * 8 in
   select data hi (hi - 7)
 
-(* ------------------------------------------------------------------ *)
-(* S-boxes (forward & inverse)                                        *)
-(* ------------------------------------------------------------------ *)
 
 let inv_sbox =
   let t = Array.make 256 0 in
@@ -40,9 +33,6 @@ let inv_sbox =
     t.(idx) <- i
   ) sbox;
   t
-
-
-
 
 let sbox_lookup byte =
   let tbl = Array.map (fun x -> of_int ~width:8 x) sbox in

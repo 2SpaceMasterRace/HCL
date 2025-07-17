@@ -17,10 +17,6 @@ let wait_for_done sim outputs max_cycles =
   in
   loop 0
 
-(* ------------------------------------------------------------ *)
-(* Single encryption test                                       *)
-(* ------------------------------------------------------------ *)
-
 let test_encrypt (name, key_hex, pt_hex, ct_hex) =
   Printf.printf "=== %s ===\n" name;
   let module Sim = Cyclesim.With_interface(Aes.I)(Aes.O) in
@@ -50,18 +46,13 @@ let test_encrypt (name, key_hex, pt_hex, ct_hex) =
   inputs.start := Bits.gnd;
 
   let cycles = wait_for_done sim outputs 100 in
-  Printf.printf "  Completed in %d cycles\n" cycles;
+  Printf.printf "Completed in %d cycles\n" cycles;
 
   let got = Constant.to_hex_string ~signedness:Unsigned (Bits.to_constant !(outputs.data_out)) in
   Printf.printf "  Got:       %s\n" got;
   let pass = String.(got = ct_hex) in
   Printf.printf "  %s\n" (if pass then "✓ PASS" else "✗ FAIL");
   pass
-
-
-(* ------------------------------------------------------------ *)
-(* Single decryption test                                       *)
-(* ------------------------------------------------------------ *)
 
 let test_decrypt (name, key_hex, ct_hex, pt_hex) =
   Printf.printf "=== %s (decrypt) ===\n" name;
@@ -82,7 +73,6 @@ let test_decrypt (name, key_hex, ct_hex, pt_hex) =
   Printf.printf "  Key:        %s\n" key_hex;
   Printf.printf "  Ciphertext: %s\n" ct_hex;
   Printf.printf "  Expected:   %s\n" pt_hex;
-
   while Bits.to_int !(outputs.ready) = 0 do Cyclesim.cycle sim done;
 
   inputs.key := hex_to_bits 128 key_hex;
@@ -90,7 +80,7 @@ let test_decrypt (name, key_hex, ct_hex, pt_hex) =
   inputs.start := Bits.vdd;
   Cyclesim.cycle sim;
   inputs.start := Bits.gnd;
-
+  
   let cycles = wait_for_done sim outputs 100 in
   Printf.printf "  Completed in %d cycles\n" cycles;
 
@@ -100,17 +90,13 @@ let test_decrypt (name, key_hex, ct_hex, pt_hex) =
   Printf.printf "  %s\n" (if pass then "✓ PASS" else "✗ FAIL");
   pass
 
-
-(* ------------------------------------------------------------ *)
-(* Run all tests                                                *)
-(* ------------------------------------------------------------ *)
 let () =
-  Printf.printf "Running AES Tests...\n\n";
+  Printf.printf "\n=== Running AES Tests ===\n";
 
-  let test1 = test_encrypt ("All zeros test",
-                            "00000000000000000000000000000000",
-                            "00000000000000000000000000000000",
-                            "66e94bd4ef8a2c3b884cfa59ca342b2e") in
+  let test1 = test_encrypt ("Custom Test",
+                            "2b7e151628aed2a6abf7158809cf4f3c",
+                            "6bc1bee22e409f96e93d7e117393172a",
+                            "3ad77bb40d7a3660a89ecaf32466ef97") in
 
   let test2 = test_encrypt ("Pattern test",
                             "0f0e0d0c0b0a09080706050403020100",

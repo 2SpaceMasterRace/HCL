@@ -1,4 +1,3 @@
-(* bin/main.ml *)
 open Core
 open Hardcaml
 

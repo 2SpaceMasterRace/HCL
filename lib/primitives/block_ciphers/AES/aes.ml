@@ -89,8 +89,8 @@ let create (i : _ I.t) : _ O.t =
 
       AddRoundKey, [
         state_reg <-- (mux2 i.mode
-          (state_reg.value ^: round_keys.(10).value)  (* decryption: start with key 10 *)
-          (state_reg.value ^: round_keys.(0).value)   (* encryption: start with key 0 *)
+          (state_reg.value ^: round_keys.(10).value)  
+          (state_reg.value ^: round_keys.(0).value)   
         );
         round_counter <--. 1;
         state_machine.set_next MainRounds;
@@ -110,6 +110,7 @@ let create (i : _ I.t) : _ O.t =
            let round_key = mux dec_key_idx (Array.to_list (Array.map Always.Variable.value round_keys)) in
            let add_key = inv_sub ^: round_key in
            Helpers.inv_mix_columns add_key)
+
           (* Encryption: SubBytes -> ShiftRows -> MixColumns -> AddRoundKey *)
           (let sub = Helpers.sub_bytes current_state in
            let shift = Helpers.shift_rows sub in
@@ -136,6 +137,7 @@ let create (i : _ I.t) : _ O.t =
           (let inv_shift = Helpers.inv_shift_rows current_state in
            let inv_sub = Helpers.inv_sub_bytes inv_shift in
            inv_sub ^: round_keys.(0).value)
+
           (* Encryption: SubBytes -> ShiftRows -> AddRoundKey *)
           (let sub = Helpers.sub_bytes current_state in
            let shift = Helpers.shift_rows sub in

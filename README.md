@@ -2,13 +2,14 @@
 HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys boards for Hardcaml
 
 # Instructions 
-Only AES is implemented as of yet. You can find the implementation of AES at :
+Only AES is implemented for now. You can find the implementation of AES at :
 ```bash
 /lib/primitives/block_ciphers/AES/aes.ml
 ```
 and the helper functions can be found at :
 ```bash
 /lib/utils/test_helpers.ml
+
 ```
 CLI is not implemented yet. To check encryption and decryption, head over to 
 ```bash
@@ -27,12 +28,12 @@ You can also verify through this [neat tool](http://aes.online-domain-tools.com/
 
 # Architecture
 
-| Architecture Component           | Description                          |
-|----------------------------------|--------------------------------------|
-| High-Level OCaml API             | <-- Tink-style safe interfaces       |
-| Hardcaml Circuit Library         | <-- Hardware implementations         |
-| Verified Primitive Cores         | <-- Formally verified components     |
-| FPGA                             | <-- Xilinx/Intel/Lattice support     |
+| Architecture Component           | Description                                  |
+|----------------------------------|----------------------------------------------|
+| High-Level OCaml API             | <-- Tink-style safe interfaces               |
+| Hardcaml Circuit Library         | <-- Hardware implementations [ONGOING]         |
+| Verified Primitive Cores         | <-- Formally verified components             |
+| FPGA                             | <-- Xilinx/Intel/Lattice support             |
 
 
 # Core Design Principles

@@ -3,15 +3,12 @@ HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys
 
 # Architecture
 
-┌─────────────────────────────────────┐
-│         High-Level OCaml API        │  <- Tink-style safe interfaces
-├─────────────────────────────────────┤
-│      Hardcaml Circuit Library       │  <- Hardware implementations
-├─────────────────────────────────────┤
-│     Verified Primitive Cores        │  <- Formally verified components
-├─────────────────────────────────────┤
-│    FPGA Platform Abstraction        │  <- Xilinx/Intel/Lattice support
-└─────────────────────────────────────┘
+| Architecture Component         | Description                          |
+|----------------------------------|--------------------------------------|
+| High-Level OCaml API             | <-- Tink-style safe                   |
+| Hardcaml Circuit Library         | <-- Hardware implementations          |
+| Verified Primitive Cores         | <-- Formally verified components      |
+| FPGA                             | <-- Xilinx/Intel/Lattice support       |
 
 # Core Design Principles
 

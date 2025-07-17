@@ -1,29 +1,25 @@
-# Hardcaml-Cryptography-Library
+# Hardcaml Cryptography Library 
 HCL is an open-source, plug-and-play cryptography library for the Arty and Nexys boards for Hardcaml
 
 # Instructions 
-Only AES is implemented for now. You can find the implementation of AES at :
-```bash
-/lib/primitives/block_ciphers/AES/aes.ml
-```
-and the helper functions can be found at :
-```bash
-/lib/utils/test_helpers.ml
 
-```
-CLI is not implemented yet. To check encryption and decryption, head over to 
+The current AES implementation supports 128-bit ECB encryption and accepts input in hex only. CLI is not implemented yet and edge cases are to be covered. To check encryption and decryption, head over to 
+
 ```bash
 test/test_primitives/test_block_ciphers/test_aes
 ```
 and head to EOF to find the test cases and modify them to your use-case.
 
 
+<img width="1056" height="753" alt="image" src="https://github.com/user-attachments/assets/d3a5e13e-6d9b-4d88-8d8f-55f39073f611" />
+
 To execute the program, just write the following command in your terminal:
 ```ocaml
 dune exec hcl_main simulate
 ```
 
-You can also verify through this [neat tool](http://aes.online-domain-tools.com/).
+
+You can also verify your test cases through this [neat tool](http://aes.online-domain-tools.com/).
 
 
 # Architecture
@@ -35,6 +31,15 @@ You can also verify through this [neat tool](http://aes.online-domain-tools.com/
 | Verified Primitive Cores         | <-- Formally verified components             |
 | FPGA                             | <-- Xilinx/Intel/Lattice support             |
 
+
+You can find the implementation of AES at :
+```bash
+/lib/primitives/block_ciphers/AES/aes.ml
+```
+and the helper functions can be found at :
+```bash
+/lib/utils/test_helpers.ml
+```
 
 # Core Design Principles
 

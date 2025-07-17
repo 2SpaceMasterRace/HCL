@@ -1,0 +1,225 @@
+(lang dune 3.19)
+(name HCL)
+(sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/HCL))
+(files
+ (lib
+  (META
+   aes/aes.a
+   aes/aes.cma
+   aes/aes.cmi
+   aes/aes.cmt
+   aes/aes.cmx
+   aes/aes.cmxa
+   aes/aes.ml
+   dune-package
+   hcl.a
+   hcl.cma
+   hcl.cmi
+   hcl.cmt
+   hcl.cmx
+   hcl.cmxa
+   hcl.ml
+   opam
+   primitives/primitives.a
+   primitives/primitives.cma
+   primitives/primitives.cmi
+   primitives/primitives.cmt
+   primitives/primitives.cmx
+   primitives/primitives.cmxa
+   primitives/primitives.ml
+   utils/test_helpers.ml
+   utils/utils.a
+   utils/utils.cma
+   utils/utils.cmi
+   utils/utils.cmt
+   utils/utils.cmx
+   utils/utils.cmxa
+   utils/utils.ml
+   utils/utils__Test_helpers.cmi
+   utils/utils__Test_helpers.cmt
+   utils/utils__Test_helpers.cmx))
+ (libexec (aes/aes.cmxs hcl.cmxs primitives/primitives.cmxs utils/utils.cmxs))
+ (bin (hcl_main test_aes))
+ (doc (CHANGELOG.md README.md)))
+(library
+ (name HCL)
+ (kind normal)
+ (archives (byte hcl.cma) (native hcl.cmxa))
+ (plugins (byte hcl.cma) (native hcl.cmxs))
+ (native_archives hcl.a)
+ (requires
+  core
+  hardcaml
+  ppx_sexp_conv.runtime-lib
+  sexplib0
+  ppx_compare.runtime-lib
+  ppx_enumerate.runtime-lib
+  ppx_hash.runtime-lib
+  ppx_here.runtime-lib
+  ppx_assert.runtime-lib
+  ppx_bench.runtime-lib
+  bin_prot
+  fieldslib
+  ppx_inline_test.config
+  ppx_inline_test.runtime-lib
+  ppx_module_timer.runtime
+  ppx_stable_witness.runtime
+  ppx_string.runtime
+  base
+  typerep
+  variantslib
+  ppx_expect.runtime
+  ppx_expect.config
+  ppx_log.types
+  ppx_log.syntax
+  base_quickcheck.ppx_quickcheck.runtime
+  base_quickcheck)
+ (main_module_name Hcl)
+ (modes byte native)
+ (modules
+  (singleton
+   (obj_name hcl)
+   (visibility public)
+   (source (path Hcl) (impl (path hcl.ml))))))
+(library
+ (name HCL.aes)
+ (kind normal)
+ (archives (byte aes/aes.cma) (native aes/aes.cmxa))
+ (plugins (byte aes/aes.cma) (native aes/aes.cmxs))
+ (native_archives aes/aes.a)
+ (requires
+  core
+  hardcaml
+  HCL.utils
+  ppx_sexp_conv.runtime-lib
+  sexplib0
+  ppx_compare.runtime-lib
+  ppx_enumerate.runtime-lib
+  ppx_hash.runtime-lib
+  ppx_here.runtime-lib
+  ppx_assert.runtime-lib
+  ppx_bench.runtime-lib
+  bin_prot
+  fieldslib
+  ppx_inline_test.config
+  ppx_inline_test.runtime-lib
+  ppx_module_timer.runtime
+  ppx_stable_witness.runtime
+  ppx_string.runtime
+  base
+  typerep
+  variantslib
+  ppx_expect.runtime
+  ppx_expect.config
+  ppx_log.types
+  ppx_log.syntax
+  base_quickcheck.ppx_quickcheck.runtime
+  base_quickcheck
+  ppx_hardcaml.runtime)
+ (main_module_name Aes)
+ (modes byte native)
+ (modules
+  (singleton
+   (obj_name aes)
+   (visibility public)
+   (source (path Aes) (impl (path aes/aes.ml))))))
+(library
+ (name HCL.primitives)
+ (kind normal)
+ (archives
+  (byte primitives/primitives.cma)
+  (native primitives/primitives.cmxa))
+ (plugins
+  (byte primitives/primitives.cma)
+  (native primitives/primitives.cmxs))
+ (native_archives primitives/primitives.a)
+ (requires
+  core
+  hardcaml
+  HCL.utils
+  ppx_sexp_conv.runtime-lib
+  sexplib0
+  ppx_compare.runtime-lib
+  ppx_enumerate.runtime-lib
+  ppx_hash.runtime-lib
+  ppx_here.runtime-lib
+  ppx_assert.runtime-lib
+  ppx_bench.runtime-lib
+  bin_prot
+  fieldslib
+  ppx_inline_test.config
+  ppx_inline_test.runtime-lib
+  ppx_module_timer.runtime
+  ppx_stable_witness.runtime
+  ppx_string.runtime
+  base
+  typerep
+  variantslib
+  ppx_expect.runtime
+  ppx_expect.config
+  ppx_log.types
+  ppx_log.syntax
+  base_quickcheck.ppx_quickcheck.runtime
+  base_quickcheck)
+ (main_module_name Primitives)
+ (modes byte native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name primitives)
+     (visibility public)
+     (kind alias)
+     (source (path Primitives) (impl (path primitives/primitives.ml-gen))))
+    (name Primitives))
+   (wrapped true))))
+(library
+ (name HCL.utils)
+ (kind normal)
+ (archives (byte utils/utils.cma) (native utils/utils.cmxa))
+ (plugins (byte utils/utils.cma) (native utils/utils.cmxs))
+ (native_archives utils/utils.a)
+ (requires
+  core
+  hardcaml
+  ppx_sexp_conv.runtime-lib
+  sexplib0
+  ppx_compare.runtime-lib
+  ppx_enumerate.runtime-lib
+  ppx_hash.runtime-lib
+  ppx_here.runtime-lib
+  ppx_assert.runtime-lib
+  ppx_bench.runtime-lib
+  bin_prot
+  fieldslib
+  ppx_inline_test.config
+  ppx_inline_test.runtime-lib
+  ppx_module_timer.runtime
+  ppx_stable_witness.runtime
+  ppx_string.runtime
+  base
+  typerep
+  variantslib
+  ppx_expect.runtime
+  ppx_expect.config
+  ppx_log.types
+  ppx_log.syntax
+  base_quickcheck.ppx_quickcheck.runtime
+  base_quickcheck)
+ (main_module_name Utils)
+ (modes byte native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name utils)
+     (visibility public)
+     (kind alias)
+     (source (path Utils) (impl (path utils/utils.ml-gen))))
+    (name Utils)
+    (modules
+     (module
+      (obj_name utils__Test_helpers)
+      (visibility public)
+      (source (path Test_helpers) (impl (path utils/test_helpers.ml))))))
+   (wrapped true))))

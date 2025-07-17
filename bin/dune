@@ -5,6 +5,8 @@
   HCL.aes
   HCL.utils
   core
+  core_unix
+  core_unix.command_unix
   unix
   hardcaml
   hardcaml_waveterm

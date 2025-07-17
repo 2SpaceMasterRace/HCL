@@ -1,0 +1,51 @@
+lib: [
+  "_build/install/default/lib/HCL/META"
+  "_build/install/default/lib/HCL/aes/aes.a" {"aes/aes.a"}
+  "_build/install/default/lib/HCL/aes/aes.cma" {"aes/aes.cma"}
+  "_build/install/default/lib/HCL/aes/aes.cmi" {"aes/aes.cmi"}
+  "_build/install/default/lib/HCL/aes/aes.cmt" {"aes/aes.cmt"}
+  "_build/install/default/lib/HCL/aes/aes.cmx" {"aes/aes.cmx"}
+  "_build/install/default/lib/HCL/aes/aes.cmxa" {"aes/aes.cmxa"}
+  "_build/install/default/lib/HCL/aes/aes.ml" {"aes/aes.ml"}
+  "_build/install/default/lib/HCL/dune-package"
+  "_build/install/default/lib/HCL/hcl.a"
+  "_build/install/default/lib/HCL/hcl.cma"
+  "_build/install/default/lib/HCL/hcl.cmi"
+  "_build/install/default/lib/HCL/hcl.cmt"
+  "_build/install/default/lib/HCL/hcl.cmx"
+  "_build/install/default/lib/HCL/hcl.cmxa"
+  "_build/install/default/lib/HCL/hcl.ml"
+  "_build/install/default/lib/HCL/opam"
+  "_build/install/default/lib/HCL/primitives/primitives.a" {"primitives/primitives.a"}
+  "_build/install/default/lib/HCL/primitives/primitives.cma" {"primitives/primitives.cma"}
+  "_build/install/default/lib/HCL/primitives/primitives.cmi" {"primitives/primitives.cmi"}
+  "_build/install/default/lib/HCL/primitives/primitives.cmt" {"primitives/primitives.cmt"}
+  "_build/install/default/lib/HCL/primitives/primitives.cmx" {"primitives/primitives.cmx"}
+  "_build/install/default/lib/HCL/primitives/primitives.cmxa" {"primitives/primitives.cmxa"}
+  "_build/install/default/lib/HCL/primitives/primitives.ml" {"primitives/primitives.ml"}
+  "_build/install/default/lib/HCL/utils/test_helpers.ml" {"utils/test_helpers.ml"}
+  "_build/install/default/lib/HCL/utils/utils.a" {"utils/utils.a"}
+  "_build/install/default/lib/HCL/utils/utils.cma" {"utils/utils.cma"}
+  "_build/install/default/lib/HCL/utils/utils.cmi" {"utils/utils.cmi"}
+  "_build/install/default/lib/HCL/utils/utils.cmt" {"utils/utils.cmt"}
+  "_build/install/default/lib/HCL/utils/utils.cmx" {"utils/utils.cmx"}
+  "_build/install/default/lib/HCL/utils/utils.cmxa" {"utils/utils.cmxa"}
+  "_build/install/default/lib/HCL/utils/utils.ml" {"utils/utils.ml"}
+  "_build/install/default/lib/HCL/utils/utils__Test_helpers.cmi" {"utils/utils__Test_helpers.cmi"}
+  "_build/install/default/lib/HCL/utils/utils__Test_helpers.cmt" {"utils/utils__Test_helpers.cmt"}
+  "_build/install/default/lib/HCL/utils/utils__Test_helpers.cmx" {"utils/utils__Test_helpers.cmx"}
+]
+libexec: [
+  "_build/install/default/lib/HCL/aes/aes.cmxs" {"aes/aes.cmxs"}
+  "_build/install/default/lib/HCL/hcl.cmxs"
+  "_build/install/default/lib/HCL/primitives/primitives.cmxs" {"primitives/primitives.cmxs"}
+  "_build/install/default/lib/HCL/utils/utils.cmxs" {"utils/utils.cmxs"}
+]
+bin: [
+  "_build/install/default/bin/hcl_main"
+  "_build/install/default/bin/test_aes"
+]
+doc: [
+  "_build/install/default/doc/HCL/CHANGELOG.md"
+  "_build/install/default/doc/HCL/README.md"
+]

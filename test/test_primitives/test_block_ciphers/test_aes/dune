@@ -1,0 +1,13 @@
+(include_subdirs no)
+
+(executable
+ (public_name test_aes)
+ (name test_aes)
+ (libraries
+  HCL.aes
+  HCL.utils
+  core
+  core_unix
+  hardcaml
+  )
+ (preprocess (pps ppx_jane)))

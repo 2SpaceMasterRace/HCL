@@ -1,0 +1,16 @@
+# dune exec test/test_primitives/test_block_ciphers/test_aes/test_aes.exe
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/nanodijkstra/.cache/dune/db
+# Workspace root: /home/nanodijkstra/Work/iitm-experiments/HCL
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /home/nanodijkstra/.opam/default/bin/ocamlc.opt -config > /tmp/dune_1055b3_output

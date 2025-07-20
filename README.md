@@ -8,7 +8,13 @@ The current AES implementation supports 128-bit ECB encryption and accepts input
 ```bash
 test/test_primitives/test_block_ciphers/test_aes
 ```
-and head to EOF to find the test cases and modify them to your use-case.
+and head to EOF to find the test cases and modify them to your use-case. The pattern for the testcases are as follows:
+```markdown
+"Name of the test               : string",
+"Input text                     :    hex",
+"Key                            :    hex",
+"Expected cipher/decrypted text :    hex"
+```
 
 
 <img width="1056" height="753" alt="image" src="https://github.com/user-attachments/assets/d3a5e13e-6d9b-4d88-8d8f-55f39073f611" />
